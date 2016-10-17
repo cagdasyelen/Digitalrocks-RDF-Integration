@@ -1,7 +1,10 @@
 package com.digitalrocksportal.rdf.sample;
 
+import org.apache.jena.vocabulary.*;
+import org.apache.jena.rdf.model.*;
+
 /**
- * @author cagdas
+ * @author cagdasyelen
  * 
  * This class is to define the metadata in a project page.
  * Even though this class is under the sample package, 
@@ -12,7 +15,6 @@ public class Metadata {
 	private String URL;
 	private String projectName;
 	private String description;
-	private String imageURL;
 	
 	
 	private String author;
@@ -20,6 +22,8 @@ public class Metadata {
 	private String dateCreated;
 	private String license;
 	private String citation;
+	
+	private Model RDFModel;
 	
 	
 	/**
@@ -30,7 +34,6 @@ public class Metadata {
 		this.URL = "https://www.digitalrocksportal.org/projects/35/";
 		this.projectName = "Austin Chalk";
 		this.description = "Rock sample obtained from an Austin Chalk Formation outcrop.";
-		this.imageURL = "https;//www.fakeimageurl.org";
 		
 		this.author = "Zoya Heidari (The University of Texas at Austin)";
 		this.collaborators = new String[1];
@@ -39,6 +42,31 @@ public class Metadata {
 		this.license = "ODC-BY 1.0";
 		this.citation = "doi:10.17612/P73011";
 	}
+	
+
+	public Model getRDFModel(){
+		if(this.RDFModel == null){
+			this.RDFModel = ModelFactory.createDefaultModel();
+
+			Resource r = RDFModel.createResource(this.URL);
+			
+			r.addProperty(DC.identifier, this.projectName);
+			r.addProperty(DC.description, this.description);
+			r.addProperty(DC.creator, this.author);
+			
+			for(int i=0 ; i<this.collaborators.length ; i++){
+				r.addProperty(DC.contributor, this.collaborators[i]);
+			}
+			
+			r.addProperty(DC.date, this.dateCreated);
+			r.addProperty(DCTerms.license, this.license);
+			r.addProperty(DCTerms.bibliographicCitation, this.citation);
+			
+		}
+		
+		return this.RDFModel;
+	}
+
 
 
 	public String getURL() {
@@ -68,16 +96,6 @@ public class Metadata {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-
-	public String getImageURL() {
-		return this.imageURL;
-	}
-
-
-	public void setImageURL(String imageURL) {
-		this.imageURL = imageURL;
 	}
 
 
