@@ -126,7 +126,7 @@ public class Page {
 	 * Inserts author property
 	 */
 	public void insertAuthorProp(){
-		this.authorTag.attr("itemprop", this.AUTHOR_PROP);
+		this.authorAttr.attr("itemprop", this.AUTHOR_PROP);
 	}
 	
 	
@@ -160,21 +160,129 @@ public class Page {
 		this.citeAttr.attr("itemprop", this.CITATION);
 	}
 	
+	@Override
+	public String toString(){
+		return this.doc.toString();
+	}
 	
 	
-	
+	public String getPageUrl() {
+		return this.pageUrl;
+	}
+
+	public void setPageUrl(String pageUrl) {
+		this.pageUrl = pageUrl;
+	}
+
+	public Document getDoc() {
+		return this.doc;
+	}
+
+	public void setDoc(Document doc) {
+		this.doc = doc;
+	}
+
+	public Element getOuterDiv() {
+		return this.outerDiv;
+	}
+
+	public void setOuterDiv(Element outerDiv) {
+		this.outerDiv = outerDiv;
+	}
+
+	public Element getInnerDiv() {
+		return this.innerDiv;
+	}
+
+	public void setInnerDiv(Element innerDiv) {
+		this.innerDiv = innerDiv;
+	}
+
+	public Element getAuthorTag() {
+		return this.authorTag;
+	}
+
+	public void setAuthorTag(Element authorTag) {
+		this.authorTag = authorTag;
+	}
+
+	public Element getAuthorAttr() {
+		return this.authorAttr;
+	}
+
+	public void setAuthorAttr(Element authorAttr) {
+		this.authorAttr = authorAttr;
+	}
+
+	public Element getCollaboratorsTag() {
+		return this.collaboratorsTag;
+	}
+
+	public void setCollaboratorsTag(Element collaboratorsTag) {
+		this.collaboratorsTag = collaboratorsTag;
+	}
+
+	public Elements getCollaborators() {
+		return this.collaborators;
+	}
+
+	public void setCollaborators(Elements collaborators) {
+		this.collaborators = collaborators;
+	}
+
+	public Element getCreatedTag() {
+		return this.createdTag;
+	}
+
+	public void setCreatedTag(Element createdTag) {
+		this.createdTag = createdTag;
+	}
+
+	public Element getCreatedAttr() {
+		return this.createdAttr;
+	}
+
+	public void setCreatedAttr(Element createdAttr) {
+		this.createdAttr = createdAttr;
+	}
+
+	public Element getLicenseTag() {
+		return this.licenseTag;
+	}
+
+	public void setLicenseTag(Element licenseTag) {
+		this.licenseTag = licenseTag;
+	}
+
+	public Element getLicenseAttr() {
+		return this.licenseAttr;
+	}
+
+	public void setLicenseAttr(Element licenseAttr) {
+		this.licenseAttr = licenseAttr;
+	}
+
+	public Element getCiteTag() {
+		return this.citeTag;
+	}
+
+	public void setCiteTag(Element citeTag) {
+		this.citeTag = citeTag;
+	}
+
+	public Element getCiteAttr() {
+		return this.citeAttr;
+	}
+
+	public void setCiteAttr(Element citeAttr) {
+		this.citeAttr = citeAttr;
+	}
+
 	public static void main(String [] args) throws Exception{
 		Page p = new Page("https://www.digitalrocksportal.org/projects/35/");
-		
-		
-		
-		//Adding the itemtype & itemscope
-		p.outerDiv.attr("itemscope itemtype", "http://schema.org/Dataset");
+		System.out.println(p.toString());
 		
 	
-	
-
-		
 	}
 
 }
