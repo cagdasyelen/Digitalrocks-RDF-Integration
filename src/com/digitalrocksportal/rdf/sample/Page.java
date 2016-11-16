@@ -18,7 +18,21 @@ import org.jsoup.Jsoup;
  * For ref: https://www.digitalrocksportal.org/
  *
  */
+/**
+ * @author cagdas
+ *
+ */
 public class Page {
+	
+	
+	//Modify the schema.org entities here if needed
+	//Please note that the main type needs to have the following properties
+	private final String MAIN_TYPE = "Dataset";
+	private final String AUTHOR_PROP = "author";
+	private final String CONTRIBUTOR_PROP = "contributor";
+	private final String CREATED_PROP = "dateCreated";
+	private final String LICENSE = "license";
+	private final String CITATION = "citation";
 	
 	private String pageUrl;
 	private Document doc;
@@ -37,6 +51,9 @@ public class Page {
 	private Element licenseAttr;
 	private Element citeTag;
 	private Element citeAttr;
+	
+
+	
 	
 	/**
 	 * 
@@ -96,17 +113,68 @@ public class Page {
 	
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param type the main metadata type(ie. Dataset )
+	 */
+	public void inserMainType(){
+		this.outerDiv.attr("itemscope itemtype", "http://schema.org/" + this.MAIN_TYPE);
+	}
+
+	/**
+	 * Inserts author property
+	 */
+	public void insertAuthorProp(){
+		this.authorTag.attr("itemprop", this.AUTHOR_PROP);
+	}
+	
+	
+	/**
+	 * Inserts contributor/collabrator property
+	 */
+	public void insertCollabratorsProp(){
+		for(Element e: this.collaborators){
+			e.attr("itemprop", this.CONTRIBUTOR_PROP);
+		}
+	}
+	
+	/**
+	 * Inserts created date property
+	 */
+	public void insertCreatedDateProp(){
+		this.createdAttr.attr("itemprop", this.CREATED_PROP);
+	}
+	
+	/**
+	 * Inserts license property
+	 */
+	public void insertLicense(){
+		this.licenseAttr.attr("itemprop", this.LICENSE);
+	}
+	
+	/**
+	 * Inserts citation property
+	 */
+	public void insertCitation(){
+		this.citeAttr.attr("itemprop", this.CITATION);
+	}
+	
+	
+	
+	
 	public static void main(String [] args) throws Exception{
 		Page p = new Page("https://www.digitalrocksportal.org/projects/35/");
 		
 		
-		/*
+		
 		//Adding the itemtype & itemscope
-		e.attr("itemscope itemtype", "http://schema.org/Dataset");
+		p.outerDiv.attr("itemscope itemtype", "http://schema.org/Dataset");
 		
 	
+	
 
-		*/
+		
 	}
 
 }
